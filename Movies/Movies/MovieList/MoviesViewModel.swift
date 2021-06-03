@@ -6,27 +6,28 @@
 //
 
 import Foundation
-
+import Combine
+/// Movies View Model
 class MovieViewModel: ObservableObject  {
     
-    @Published var movies = MovieList()
+    @Published var movies: [Movie] = []
+    var cancellationToken: AnyCancellable?
+    var currentPage = 1
     
     init() {
         self.fetchMovies()
     }
     
     func fetchMovies() {
-        guard let url = URL(string: "https://api.themoviedb.org/3/movie/popular?api_key=dcdd37442148f79b3e9aeec690e825a5&page=1&language=es-ES") else {
-                   print("Invalid url...")
-                   return
-               }
-               URLSession.shared.dataTask(with: url) { data, response, error in
-                if let error = error {
-                    print(error)
-                }
-                self.movies = try! JSONDecoder().decode(MovieList.self, from: data!)
-                print(self.movies)
-               }.resume()
+        cancellationToken = MovieAPI.requestMovieList(.popular, page: currentPage)
+            .mapError({ (error) -> Error in
+                print(error)
+                return error
+            })
+            .sink(receiveCompletion: { _ in },
+                  receiveValue: {
+                    self.movies += $0.results
+                    self.currentPage += 1
+            })
     }
-    
 }

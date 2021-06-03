@@ -15,11 +15,16 @@ struct MoviesView: View {
             VStack {
                 SearchBar(text: $searchText, placeholder: "Search Bar")
                 List {
-                    ForEach(moviesModel.movies.results.filter {
+                    ForEach(moviesModel.movies.filter {
                         self.searchText.isEmpty ? true : $0.title.lowercased().contains(self.searchText.lowercased())
                     }, id: \.self) { movie in
                         NavigationLink(destination: MoviewDetailView()) {
                             Text(movie.title)
+                                .onAppear {
+                                    if self.moviesModel.movies.last == movie {
+                                        self.moviesModel.fetchMovies()
+                                    }
+                                }
                         }
                     }
                 }.listStyle(PlainListStyle())
