@@ -47,7 +47,4 @@ struct Movie: Codable, Hashable, Identifiable {
         case voteAverage = "vote_average"
         case overview
     }
-    func createURL() -> URL {
-        return URL(string: "\(MovieAPI.imageURL)" + "\(PosterSize.medium.rawValue)" + "\(self.poster ?? "")")!
-    }
 }

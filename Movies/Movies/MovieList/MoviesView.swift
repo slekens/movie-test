@@ -27,7 +27,7 @@ struct MoviesView: View {
                             ForEach(moviesModel.movies.filter {
                                 self.searchText.isEmpty ? true : $0.title.lowercased().contains(self.searchText.lowercased())
                             }, id: \.id) { movie in
-                                NavigationLink(destination: MoviewDetailView(movie: movie)) {
+                                NavigationLink(destination: MovieDetailView(movie: movie)) {
                                     MovieCardView(movie: movie)
                                         .frame(height: 160)
                                         .onAppear {

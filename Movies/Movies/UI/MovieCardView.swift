@@ -11,14 +11,21 @@ struct MovieCardView: View {
     var movie: Movie
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-            AsyncImage(url: movie.createURL(),
-                       placeholder: { Text("Loading ...") },
-                       image: {
-                        Image(uiImage: $0)
-                            .resizable()
-                       })
-                .cornerRadius(10)
-                .shadow(radius: 10)
+            if let poster = movie.poster {
+                AsyncImage(url: MovieAPI.createURL(posterSize: .small, imageName: poster),
+                           placeholder: {
+                            LoadingView()
+                                .padding()
+                           },
+                           image: {
+                            Image(uiImage: $0)
+                                .resizable()
+                           })
+                    .cornerRadius(10)
+                    .shadow(radius: 10)
+            } else {
+                Image(systemName: "Movie")
+            }
         }
     }
 }
