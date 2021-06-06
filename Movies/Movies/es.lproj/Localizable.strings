@@ -1,0 +1,22 @@
+/* 
+  Localizable.strings
+  Movies
+
+  Created by Abraham Abreu on 05/06/21.
+  
+*/
+// MARK: - Errors
+"URL_CREATION_ERROR" = "No se pudo crear la url";
+"COMPONENT_CREATION_ERROR" = "No se pudo crear los componentes";
+// MARK: - Movie Detail View
+"LABEL_RANK" = "• Popularidad: ";
+"LABEL_TOTAL_VOTES %lld" = "• Total de Votos: %lld";
+"LABEL_CAST" = "Personajes";
+"LABEL_VIDEOS" = "Video";
+// MARK: - Movie View
+"MOVIE_VIEW_TITLE" = "Películas";
+"LABEL_SEARCH_BAR" = "Buscar películas";
+"LABEL_SHEET_TITLE" = "Selecciona una categoría";
+"LABEL_SHEET_OPTION_POPULAR" = "Popular";
+"LABEL_SHEET_OPTION_TOP_RATED" = "Mejor valoradas";
+"LABEL_SHEET_OPTION_UPCOMMING" = "Próximamente";
