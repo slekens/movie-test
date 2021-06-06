@@ -9,6 +9,9 @@ import Foundation
 import Combine
 /// Movies View Model
 class MovieViewModel: ObservableObject  {
+    // MARK: - Properties
+    /// The view title
+    let viewTitle: String = NSLocalizedString("MOVIE_VIEW_TITLE", comment: "")
     /// We store the movie list.
     @Published var movies: [Movie] = []
     /// We store the actual category selected.
@@ -17,10 +20,12 @@ class MovieViewModel: ObservableObject  {
     var cancellationToken: AnyCancellable?
     /// Manage the current page from our movies.
     var currentPage = 1
+    // MARK: - Initialization
     /// Class constructor
     init() {
         self.fetchMovies(category)
     }
+    // MARK: - Methods
     /// Fetch the movie list by category
     /// - Parameter movieType: The category selected by the user.
     func fetchMovies(_ movieType: Path) {

@@ -7,12 +7,15 @@
 //
 
 import SwiftUI
-
+import AVKit
+/// Movie detail view
 struct MovieDetailView : View {
+    // MARK: - Propoerties
     var movie: Movie
     @ObservedObject var model = MovieDetailViewModel()
     @State var time = Timer.publish(every: 0.1, on: .current, in: .tracking).autoconnect()
     @State var show = false
+    // MARK: - Body View
     var body: some View {
         GeometryReader { geometry in
             ZStack(alignment: .top, content: {
@@ -25,20 +28,32 @@ struct MovieDetailView : View {
                                 .fontWeight(.bold)
                             Text(model.movieDetail.releaseDate.prefix(4))
                                 .font(.body)
-                            VStack(spacing: 20){
-                                PopularityBadge(score: Int(model.movieDetail.popularity / 100))
+                            VStack(spacing: 10){
                                 HStack {
-                                    let average = String(format: "• Rank: %.1f", model.movieDetail.voteAverage)
-                                    Text("\(average)")
+                                    Text("LABEL_RANK")
                                         .font(.subheadline)
-                                    Text("• Total Votes: \(model.movieDetail.voteCount)")
+                                    PopularityBadge(score: Int(model.movieDetail.voteAverage * 10))
+                                    Text("LABEL_TOTAL_VOTES \(model.movieDetail.voteCount)")
                                         .font(.subheadline)
                                 }
-                                TagList(genres: model.movieDetail.genres, geometry: geometry)
-                                Text(movie.overview)
+                                GenreView(genres: model.movieDetail.genres, geometry: geometry)
+                                .padding()
+                                VStack(alignment: .leading) {
+                                    Text(movie.overview)
+                                        .fixedSize(horizontal: false, vertical: true)
+                                }
+                                VStack(alignment: .leading) {
+                                    Text("LABEL_CAST")
+                                        .font(.title2)
+                                    CastView(castList: model.casList)
+                                    if model.videos.count != 0 {
+                                        Text("LABEL_VIDEOS")
+                                            .font(.title2)
+                                        VideoPlayer(player: MovieAPI.createVideoPlayer(key: model.videos[0].key))
+                                    }
+                                }
                             }
                             .padding(.top)
-                            CastView(castList: model.casList)
                         }
                         .padding()
                     }
@@ -59,7 +74,7 @@ struct MovieDetailView : View {
             if let moviePicture = movie.poster {
                 AsyncImage(url: MovieAPI.createURL(posterSize: .poster, imageName: moviePicture),
                            placeholder: {
-                            LoadingView()
+                            PlaceholderMovieView()
                                 .padding()
                            },
                            image: {
@@ -68,18 +83,22 @@ struct MovieDetailView : View {
                            })
                     .offset(y: g.frame(in: .global).minY > 0 ? -g.frame(in: .global).minY : 0)
                     .frame(height: g.frame(in: .global).minY > 0 ? UIScreen.main.bounds.height / sizeDelta + g.frame(in: .global).minY  : UIScreen.main.bounds.height / sizeDelta)
+                    .cornerRadius(20.0)
             } else {
-                Image(systemName: "movie")
+                PlaceholderMovieView()
                     .offset(y: g.frame(in: .global).minY > 0 ? -g.frame(in: .global).minY : 0)
                     .frame(height: g.frame(in: .global).minY > 0 ? UIScreen.main.bounds.height / sizeDelta + g.frame(in: .global).minY  : UIScreen.main.bounds.height / sizeDelta)
+                    .cornerRadius(20.0)
             }
         }
         .frame(height: UIScreen.main.bounds.height / sizeDelta)
     }
 }
-
+// MARK: - Preview
+#if DEBUG
 struct MovieDetailView_Previews: PreviewProvider {
     static var previews: some View {
         MovieDetailView(movie: Movie(poster: "avengers", movieID: 12345, title: "Aquaman", overview: "Set before the events of ‘Soul’, 22 refuses to go to Earth, enlisting a gang of 5 new souls in attempt of rebellion. However, 22’s subversive plot leads to a surprising revelation about the meaning of life.", popularity: 800.35, voteCount: 100, voteAverage: 60))
     }
 }
+#endif

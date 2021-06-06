@@ -6,8 +6,9 @@
 //
 
 import SwiftUI
-
+/// View for the list of movies
 struct MoviesView: View {
+    // MARK: - Properties
     @ObservedObject var moviesModel = MovieViewModel()
     @State private var searchText : String = ""
     @State private var showingSheet = false
@@ -16,11 +17,11 @@ struct MoviesView: View {
         GridItem(.fixed(100), spacing: 16),
         GridItem(.fixed(100), spacing: 16)
     ]
-    
+    // MARK: - Body View
     var body: some View {
         NavigationView {
             VStack {
-                SearchBar(text: $searchText, placeholder: "Search Bar")
+                SearchBar(text: $searchText, placeholder: "LABEL_SEARCH_BAR")
                 VStack(alignment: .leading) {
                     ScrollView(.vertical, showsIndicators: true) {
                         LazyVGrid(columns: columns, alignment: .center, spacing: 16) {
@@ -41,7 +42,7 @@ struct MoviesView: View {
                     }
                 }
             }
-            .navigationBarTitle("Movies", displayMode: .large)
+            .navigationBarTitle(moviesModel.viewTitle, displayMode: .large)
             .navigationBarItems(trailing: Button(action: {
                 showingSheet = true
             }) {
@@ -49,11 +50,11 @@ struct MoviesView: View {
             })
             .actionSheet(isPresented: $showingSheet) {
                 ActionSheet(
-                    title: Text("Select a moview category"),
+                    title: Text("LABEL_SHEET_TITLE"),
                     buttons: [
-                        .default(Text("Popular")) { moviesModel.fetchMovies(.popular)},
-                        .default(Text("Top Rated")) { moviesModel.fetchMovies(.topRated)},
-                        .default(Text("Upcomming")) { moviesModel.fetchMovies(.upcomming)},
+                        .default(Text("LABEL_SHEET_OPTION_POPULAR")) { moviesModel.fetchMovies(.popular)},
+                        .default(Text("LABEL_SHEET_OPTION_TOP_RATED")) { moviesModel.fetchMovies(.topRated)},
+                        .default(Text("LABEL_SHEET_OPTION_UPCOMMING")) { moviesModel.fetchMovies(.upcomming)},
                         .cancel()
                     ]
                 )
@@ -61,9 +62,11 @@ struct MoviesView: View {
         }
     }
 }
-
+// MARK: - Preview
+#if DEBUG
 struct MoviesView_Previews: PreviewProvider {
     static var previews: some View {
         MoviesView()
     }
 }
+#endif

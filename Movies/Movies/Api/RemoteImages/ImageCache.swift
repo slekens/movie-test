@@ -7,11 +7,13 @@
 
 import Foundation
 import UIKit
-
+/// Protocol to the cache
 protocol ImageCache {
     subscript(_ url: URL) -> UIImage? { get set }
 }
+/// The cache configuration
 struct TemporaryImageCache: ImageCache {
+    // MARK: Properties
     private let cache: NSCache<NSURL, UIImage> = {
         let cache = NSCache<NSURL, UIImage>()
         cache.countLimit = 100

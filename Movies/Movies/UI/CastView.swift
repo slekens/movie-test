@@ -6,9 +6,11 @@
 //
 
 import SwiftUI
-
+/// Cast View
 struct CastView: View {
+    // MARK: - Properties.
     var castList: [Cast]
+    // MARK: - Body View
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack {
@@ -17,13 +19,13 @@ struct CastView: View {
                         if let profilePicture = cast.profilePicture {
                             AsyncImage(url: MovieAPI.createURL(posterSize: .cast, imageName: profilePicture),
                                        placeholder: {
-                                            Image(systemName: "person.circle.fill")
-                                                .resizable()
-                                        },
-                                        image: {
-                                            Image(uiImage: $0)
-                                                .resizable()
-                                        })
+                                        Image(systemName: "person.circle.fill")
+                                            .resizable()
+                                       },
+                                       image: {
+                                        Image(uiImage: $0)
+                                            .resizable()
+                                       })
                                 .frame(width: 80, height: 80, alignment: .center)
                                 .cornerRadius(100)
                                 .clipped()
@@ -49,12 +51,15 @@ struct CastView: View {
         }
     }
 }
-
+// MARK: - Preview
+#if DEBUG
 struct CastView_Previews: PreviewProvider {
     static var previews: some View {
         CastView(castList: [
-                    Cast(id: 1, name: "Emma Stone", character: "Emma Stone", popularity: 5000, profilePicture: "avengers"),
-                    Cast(id: 2, name: "Emma Stone", character: "Emma Stone", popularity: 5000, profilePicture: "avengers"),
-                    Cast(id: 3, name: "Emma Stone", character: "Emma Stone", popularity: 5000, profilePicture: "avengers")])
+                    Cast(id: 1, name: "Emma Stone", character: "Emma Stone", profilePicture: "avengers"),
+                    Cast(id: 2, name: "Emma Stone", character: "Emma Stone", profilePicture: "avengers"),
+                    Cast(id: 3, name: "Emma Stone", character: "Emma Stone", profilePicture: "avengers")
+        ])
     }
 }
+#endif

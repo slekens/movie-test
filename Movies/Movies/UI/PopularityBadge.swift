@@ -6,19 +6,13 @@
 //
 
 import SwiftUI
-
+/// This is a view for show a metter based on the average vote form a movie.
 public struct PopularityBadge : View {
+    // MARK: - Properties.
     public let score: Int
     public let textColor: Color
-    
     @State private var isDisplayed = false
-    
-    public init(score: Int, textColor: Color = .primary) {
-        self.score = score
-        self.textColor = textColor
-    }
-    
-    var scoreColor: Color {
+    private var scoreColor: Color {
         get {
             if score < 40 {
                 return .red
@@ -30,8 +24,13 @@ public struct PopularityBadge : View {
             return .green
         }
     }
-    
-    var overlay: some View {
+    // MARK: - Initialization.
+    public init(score: Int, textColor: Color = .primary) {
+        self.score = score
+        self.textColor = textColor
+    }
+    // MARK: - Private functions.
+    private var overlay: some View {
         ZStack {
             Circle()
                 .trim(from: 0,
@@ -45,7 +44,7 @@ public struct PopularityBadge : View {
             self.isDisplayed = true
         }
     }
-    
+    // MARK: - Body View
     public var body: some View {
         ZStack {
             Circle()
@@ -61,14 +60,13 @@ public struct PopularityBadge : View {
             .frame(width: 40, height: 40)
     }
 }
-
+// MARK: - Preview
+#if DEBUG
 struct PopularityBadge_Previews : PreviewProvider {
     static var previews: some View {
         VStack {
-            PopularityBadge(score: 80)
             PopularityBadge(score: 10)
-            PopularityBadge(score: 30)
-            PopularityBadge(score: 50)
         }
     }
 }
+#endif

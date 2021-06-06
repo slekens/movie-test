@@ -8,35 +8,31 @@
 import Foundation
 import UIKit
 import Combine
-
+/// This the class to help to download the movie picture.
 class PosterLoader: ObservableObject {
+    // MARK: - Propoerties
     @Published var image: UIImage?
-    
     private(set) var isLoading = false
-    
     private let url: URL
     private var cache: ImageCache?
     private var cancellable: AnyCancellable?
-    
     private static let imageProcessingQueue = DispatchQueue(label: "image-processing")
-    
+    // MARK: - Initialization
     init(url: URL, cache: ImageCache? = nil) {
         self.url = url
         self.cache = cache
     }
-    
+    // MARK: - Deinitialization
     deinit {
         cancel()
     }
-    
+    // MARK: Internal methods
     func load() {
         guard !isLoading else { return }
-        
         if let image = cache?[url] {
             self.image = image
             return
         }
-        
         cancellable = URLSession.shared.dataTaskPublisher(for: url)
             .map { UIImage(data: $0.data) }
             .replaceError(with: nil)
@@ -48,19 +44,16 @@ class PosterLoader: ObservableObject {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] in self?.image = $0 }
     }
-    
     func cancel() {
         cancellable?.cancel()
     }
-    
+    // MARK: - Private methods
     private func onStart() {
         isLoading = true
     }
-    
     private func onFinish() {
         isLoading = false
     }
-    
     private func cache(_ image: UIImage?) {
         image.map { cache?[url] = $0 }
     }

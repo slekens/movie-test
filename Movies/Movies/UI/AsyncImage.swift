@@ -6,12 +6,13 @@
 //
 
 import SwiftUI
-
+/// Class to get remote image.
 struct AsyncImage<Placeholder: View>: View {
+    // MARK: - Properties
     @StateObject private var loader: PosterLoader
     private let placeholder: Placeholder
     private let image: (UIImage) -> Image
-    
+    // MARK: - Initialization
     init(
         url: URL,
         @ViewBuilder placeholder: () -> Placeholder,
@@ -21,12 +22,12 @@ struct AsyncImage<Placeholder: View>: View {
         self.image = image
         _loader = StateObject(wrappedValue: PosterLoader(url: url, cache: Environment(\.imageCache).wrappedValue))
     }
-    
+    // MARK: - Body View
     var body: some View {
         content
             .onAppear(perform: loader.load)
     }
-    
+    // MARK: - Private methods
     private var content: some View {
         Group {
             if loader.image != nil {

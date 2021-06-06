@@ -6,19 +6,19 @@
 //
 
 import SwiftUI
-
-struct TagList: View {
+/// Genre tag list view for movie detail view.
+struct GenreView: View {
+    // MARK: - Properties
     var genres: [MovieGenre]
     let geometry: GeometryProxy
-
+    //  MARK: - Body view
     var body: some View {
         self.generateContent(in: geometry)
     }
-
+    // MARK: - Private functions
     private func generateContent(in g: GeometryProxy) -> some View {
         var width = CGFloat.zero
         var height = CGFloat.zero
-
         return ZStack(alignment: .topLeading) {
             ForEach(self.genres, id: \.self) { genre in
                 self.item(for: genre.name)
@@ -47,13 +47,12 @@ struct TagList: View {
             }
         }
     }
-
-    func item(for text: String) -> some View {
+    private func item(for text: String) -> some View {
         Text(text)
             .padding(.all, 5)
             .font(.body)
             .background(Color.blue)
             .foregroundColor(Color.white)
-            .cornerRadius(5)
+            .cornerRadius(10)
     }
 }

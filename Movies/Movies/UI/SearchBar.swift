@@ -40,7 +40,7 @@ struct SearchBar: UIViewRepresentable {
         let searchBar = UISearchBar(frame: .zero)
         searchBar.delegate = context.coordinator
         searchBar.searchBarStyle = .minimal
-        searchBar.placeholder = self.placeholder
+        searchBar.placeholder = NSLocalizedString(self.placeholder, comment: "")
         searchBar.autocapitalizationType = .none
         return searchBar
     }
