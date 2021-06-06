@@ -51,8 +51,8 @@ struct GenreView: View {
         Text(text)
             .padding(.all, 5)
             .font(.body)
-            .background(Color.blue)
+            .background(Color.init(.systemBlue))
             .foregroundColor(Color.white)
-            .cornerRadius(10)
+            .cornerRadius(15)
     }
 }

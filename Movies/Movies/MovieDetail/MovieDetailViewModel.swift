@@ -33,6 +33,7 @@ class MovieDetailViewModel: ObservableObject {
                   receiveValue: {
                     self.movieDetail = $0
                   })
+
     }
     /// Function to get the movie cast or credits.
     /// - Parameter movieID: The movie id.
@@ -58,6 +59,6 @@ class MovieDetailViewModel: ObservableObject {
             .sink(receiveCompletion: { _ in },
                   receiveValue: {
                     self.videos = $0.results
-            })
+                  })
     }
 }

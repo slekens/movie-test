@@ -20,7 +20,7 @@ Son todas aquellas vistas auxiliares que se pueden reutilizar en varias seccione
 
 Aquí agrupe todas las clases que servirán para traer información de un servicio web (capa networking), así como las imágenes remotas que requiera el proyecto.
 
-1. ServicesClient: Es la clase genérica para la llamada de servicios usando la versión publisher de URLSession.datatask.
+1. ServicesClient: Es la clase genérica para la llamada de servicios usando la versión publisher de URLSession.datatask e implementa una extensión para almacenar cache de la información obtenida.
 2. MovieAPI: Aquí coloque unas constantes para el proyecto, como apikey, url de servicios y el armado de los request para cada servicio.
 
 #### RemoteImages

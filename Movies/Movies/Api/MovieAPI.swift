@@ -42,6 +42,20 @@ enum Path: String {
     case topRated = "movie/top_rated"
     /// Movie path
     case movie = "movie/"
+    /// Method to transform category to human readable.
+    /// - returns: The localized string for category name.
+    func createTitle() -> String {
+        switch self {
+        case .popular:
+            return NSLocalizedString("LABEL_SHEET_OPTION_POPULAR", comment: "")
+        case .upcomming:
+            return NSLocalizedString("LABEL_SHEET_OPTION_UPCOMMING", comment: "")
+        case .topRated:
+            return NSLocalizedString("LABEL_SHEET_OPTION_TOP_RATED", comment: "")
+        case .movie:
+            return ""
+        }
+    }
 }
 // MARK: - Request Creation
 /// Create all the movieDB Requests.
@@ -69,7 +83,6 @@ extension MovieAPI {
     /// - returns: The AVPlayer object with the youtube url.
     static func createVideoPlayer(key: String) -> AVPlayer {
         guard let urlVideo = URL(string: "https://www.youtube.com/watch?v=\(key)") else { fatalError("URL_CREATION_ERROR") }
-        print(urlVideo)
         return AVPlayer(url: urlVideo)
     }
     /// Movie Request creation.

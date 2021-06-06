@@ -12,10 +12,11 @@ struct MoviesView: View {
     @ObservedObject var moviesModel = MovieViewModel()
     @State private var searchText : String = ""
     @State private var showingSheet = false
+    let movieCardHeight: CGFloat = 160.0
     private var columns: [GridItem] = [
-        GridItem(.fixed(100), spacing: 16),
-        GridItem(.fixed(100), spacing: 16),
-        GridItem(.fixed(100), spacing: 16)
+        GridItem(.adaptive(minimum: 100), spacing: 16),
+        GridItem(.adaptive(minimum: 100), spacing: 16),
+        GridItem(.adaptive(minimum: 100), spacing: 16)
     ]
     // MARK: - Body View
     var body: some View {
@@ -25,17 +26,19 @@ struct MoviesView: View {
                 VStack(alignment: .leading) {
                     ScrollView(.vertical, showsIndicators: true) {
                         LazyVGrid(columns: columns, alignment: .center, spacing: 16) {
-                            ForEach(moviesModel.movies.filter {
-                                self.searchText.isEmpty ? true : $0.title.lowercased().contains(self.searchText.lowercased())
-                            }, id: \.id) { movie in
-                                NavigationLink(destination: MovieDetailView(movie: movie)) {
-                                    MovieCardView(movie: movie)
-                                        .frame(height: 160)
-                                        .onAppear {
-                                            if moviesModel.movies.last == movie {
-                                                moviesModel.fetchNext()
+                            Section(header: Text(moviesModel.category.createTitle()).font(.title2)) {
+                                ForEach(moviesModel.movies.filter {
+                                    self.searchText.isEmpty ? true : $0.title.lowercased().contains(self.searchText.lowercased())
+                                }, id: \.id) { movie in
+                                    NavigationLink(destination: MovieDetailView(movie: movie)) {
+                                        MovieCardView(movie: movie)
+                                            .frame(height: movieCardHeight)
+                                            .onAppear {
+                                                if moviesModel.movies.last == movie {
+                                                    moviesModel.fetchNext()
+                                                }
                                             }
-                                        }
+                                    }
                                 }
                             }
                         }

@@ -49,7 +49,9 @@ struct MovieDetailView : View {
                                     if model.videos.count != 0 {
                                         Text("LABEL_VIDEOS")
                                             .font(.title2)
-                                        VideoPlayer(player: MovieAPI.createVideoPlayer(key: model.videos[0].key))
+                                        MovieVideo(videoID: model.videos[0].key)
+                                            .frame(width: geometry.size.width - 30, height: 280, alignment: .center)
+                                            .cornerRadius(25)
                                     }
                                 }
                             }
@@ -69,7 +71,7 @@ struct MovieDetailView : View {
         }
     }
     fileprivate func HeaderView() -> some View {
-        let sizeDelta: CGFloat = 2.2
+        let sizeDelta: CGFloat = 1.3
         return GeometryReader{ g in
             if let moviePicture = movie.poster {
                 AsyncImage(url: MovieAPI.createURL(posterSize: .poster, imageName: moviePicture),
