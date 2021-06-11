@@ -17,15 +17,20 @@ struct CastView: View {
                 ForEach(castList, id: \.id) { cast in
                     HStack(alignment: .top) {
                         if let profilePicture = cast.profilePicture {
-                            AsyncImage(url: MovieAPI.createURL(posterSize: .cast, imageName: profilePicture),
-                                       placeholder: {
-                                        Image(systemName: "person.circle.fill")
-                                            .resizable()
-                                       },
-                                       image: {
-                                        Image(uiImage: $0)
-                                            .resizable()
-                                       })
+                            AsyncImage(url: MovieAPI.createURL(posterSize: .cast, imageName: profilePicture)) { phase in
+                                switch phase {
+                                case .success(let image):
+                                    image
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fill)
+                                case .failure:
+                                    PlaceholderMovieView()
+                                case .empty:
+                                    LoadingView()
+                                @unknown default:
+                                    EmptyView()
+                                }
+                            }
                                 .frame(width: 80, height: 80, alignment: .center)
                                 .cornerRadius(100)
                                 .clipped()

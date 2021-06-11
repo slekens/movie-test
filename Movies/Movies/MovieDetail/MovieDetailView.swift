@@ -74,15 +74,20 @@ struct MovieDetailView : View {
         let sizeDelta: CGFloat = 1.3
         return GeometryReader{ g in
             if let moviePicture = movie.poster {
-                AsyncImage(url: MovieAPI.createURL(posterSize: .poster, imageName: moviePicture),
-                           placeholder: {
-                            PlaceholderMovieView()
-                                .padding()
-                           },
-                           image: {
-                            Image(uiImage: $0)
-                                .resizable()
-                           })
+                AsyncImage(url: MovieAPI.createURL(posterSize: .poster, imageName: moviePicture)) { phase in
+                    switch phase {
+                    case .success(let image):
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                    case .failure:
+                        PlaceholderMovieView()
+                    case .empty:
+                        LoadingView()
+                    @unknown default:
+                        EmptyView()
+                    }
+                }
                     .offset(y: g.frame(in: .global).minY > 0 ? -g.frame(in: .global).minY : 0)
                     .frame(height: g.frame(in: .global).minY > 0 ? UIScreen.main.bounds.height / sizeDelta + g.frame(in: .global).minY  : UIScreen.main.bounds.height / sizeDelta)
                     .cornerRadius(20.0)

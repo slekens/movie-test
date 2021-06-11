@@ -25,11 +25,11 @@
 		B816B5B92669B9E7009CA8E0 /* PosterLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B816B5B82669B9E7009CA8E0 /* PosterLoader.swift */; };
 		B816B5BC2669BAF3009CA8E0 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = B816B5BB2669BAF3009CA8E0 /* ImageCache.swift */; };
 		B816B5BE2669BB22009CA8E0 /* EnviromentValues+ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = B816B5BD2669BB22009CA8E0 /* EnviromentValues+ImageCache.swift */; };
-		B816B5C02669BB56009CA8E0 /* AsyncImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B816B5BF2669BB56009CA8E0 /* AsyncImage.swift */; };
 		B8305A28266A878F002475F6 /* MovieDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8305A27266A878F002475F6 /* MovieDetailModel.swift */; };
 		B8305A30266ACDCE002475F6 /* GenreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8305A2F266ACDCE002475F6 /* GenreView.swift */; };
 		B8305A32266ADC8C002475F6 /* PopularityBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8305A31266ADC8C002475F6 /* PopularityBadge.swift */; };
 		B8305A36266AE7F3002475F6 /* CastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8305A35266AE7F3002475F6 /* CastView.swift */; };
+		B8CD14FF267412B20018DA04 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CD14FE267412B20018DA04 /* LoadingView.swift */; };
 		B8E3D077266C36B50063E88D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B8E3D079266C36B50063E88D /* Localizable.strings */; };
 		B8E3D07B266C38E50063E88D /* PlaceholderMovieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E3D07A266C38E50063E88D /* PlaceholderMovieView.swift */; };
 		B8E3D07E266D52EE0063E88D /* YouTubeVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E3D07D266D52EE0063E88D /* YouTubeVideo.swift */; };
@@ -83,11 +83,11 @@
 		B816B5B82669B9E7009CA8E0 /* PosterLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosterLoader.swift; sourceTree = "<group>"; };
 		B816B5BB2669BAF3009CA8E0 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		B816B5BD2669BB22009CA8E0 /* EnviromentValues+ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EnviromentValues+ImageCache.swift"; sourceTree = "<group>"; };
-		B816B5BF2669BB56009CA8E0 /* AsyncImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImage.swift; sourceTree = "<group>"; };
 		B8305A27266A878F002475F6 /* MovieDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailModel.swift; sourceTree = "<group>"; };
 		B8305A2F266ACDCE002475F6 /* GenreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreView.swift; sourceTree = "<group>"; };
 		B8305A31266ADC8C002475F6 /* PopularityBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularityBadge.swift; sourceTree = "<group>"; };
 		B8305A35266AE7F3002475F6 /* CastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastView.swift; sourceTree = "<group>"; };
+		B8CD14FE267412B20018DA04 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		B8E3D078266C36B50063E88D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B8E3D07A266C38E50063E88D /* PlaceholderMovieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderMovieView.swift; sourceTree = "<group>"; };
 		B8E3D07C266D3ADD0063E88D /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -242,8 +242,8 @@
 				B8305A31266ADC8C002475F6 /* PopularityBadge.swift */,
 				B8305A35266AE7F3002475F6 /* CastView.swift */,
 				B8E3D07A266C38E50063E88D /* PlaceholderMovieView.swift */,
-				B816B5BF2669BB56009CA8E0 /* AsyncImage.swift */,
 				B8E3D07D266D52EE0063E88D /* YouTubeVideo.swift */,
+				B8CD14FE267412B20018DA04 /* LoadingView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -358,6 +358,7 @@
 			knownRegions = (
 				en,
 				es,
+				Base,
 			);
 			mainGroup = B816B56C26684D90009CA8E0;
 			productRefGroup = B816B57626684D90009CA8E0 /* Products */;
@@ -506,7 +507,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B816B5C02669BB56009CA8E0 /* AsyncImage.swift in Sources */,
 				B8E3D07B266C38E50063E88D /* PlaceholderMovieView.swift in Sources */,
 				B816B5BE2669BB22009CA8E0 /* EnviromentValues+ImageCache.swift in Sources */,
 				B816B5B526697A23009CA8E0 /* MovieAPI.swift in Sources */,
@@ -520,6 +520,7 @@
 				B816B57B26684D90009CA8E0 /* MoviesView.swift in Sources */,
 				B816B5B126688B69009CA8E0 /* MovieDetailView.swift in Sources */,
 				B816B5BC2669BAF3009CA8E0 /* ImageCache.swift in Sources */,
+				B8CD14FF267412B20018DA04 /* LoadingView.swift in Sources */,
 				B816B5B326688D8D009CA8E0 /* MovieDetailViewModel.swift in Sources */,
 				B816B5A426685AF7009CA8E0 /* MoviesViewModel.swift in Sources */,
 				B816B5B72669A325009CA8E0 /* MovieCardView.swift in Sources */,
@@ -625,7 +626,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -681,7 +682,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -702,7 +703,7 @@
 				DEVELOPMENT_TEAM = 3QP7U5GNG3;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Movies/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -725,7 +726,7 @@
 				DEVELOPMENT_TEAM = 3QP7U5GNG3;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Movies/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
