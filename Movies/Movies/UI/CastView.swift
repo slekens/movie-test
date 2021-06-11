@@ -17,7 +17,7 @@ struct CastView: View {
                 ForEach(castList, id: \.id) { cast in
                     HStack(alignment: .top) {
                         if let profilePicture = cast.profilePicture {
-                            AsyncImage(url: MovieAPI.createURL(posterSize: .cast, imageName: profilePicture)) { phase in
+                            AsyncImage(url: MovieAPI.createURL(posterSize: .medium, imageName: profilePicture)) { phase in
                                 switch phase {
                                 case .success(let image):
                                     image

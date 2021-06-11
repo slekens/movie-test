@@ -13,7 +13,7 @@ struct MovieCardView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             if let poster = movie.poster {
-                AsyncImage(url: MovieAPI.createURL(posterSize: .small, imageName: poster)) { phase in
+                AsyncImage(url: MovieAPI.createURL(posterSize: .medium, imageName: poster)) { phase in
                     switch phase {
                     case .success(let image):
                         image
@@ -22,6 +22,7 @@ struct MovieCardView: View {
                         PlaceholderMovieView()
                     case .empty:
                         LoadingView()
+                            .padding()
                     @unknown default:
                         EmptyView()
                     }

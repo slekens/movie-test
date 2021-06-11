@@ -22,7 +22,6 @@ struct MoviesView: View {
     var body: some View {
         NavigationView {
             VStack {
-                SearchBar(text: $searchText, placeholder: "LABEL_SEARCH_BAR")
                 VStack(alignment: .leading) {
                     ScrollView(.vertical, showsIndicators: true) {
                         LazyVGrid(columns: columns, alignment: .center, spacing: 16) {
@@ -45,6 +44,7 @@ struct MoviesView: View {
                     }
                 }
             }
+            .searchable(text: $searchText)
             .navigationBarTitle(moviesModel.viewTitle, displayMode: .large)
             .navigationBarItems(trailing: Button(action: {
                 showingSheet = true

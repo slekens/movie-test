@@ -71,7 +71,7 @@ struct MovieDetailView : View {
         }
     }
     fileprivate func HeaderView() -> some View {
-        let sizeDelta: CGFloat = 1.3
+        let sizeDelta: CGFloat = 1.5
         return GeometryReader{ g in
             if let moviePicture = movie.poster {
                 AsyncImage(url: MovieAPI.createURL(posterSize: .poster, imageName: moviePicture)) { phase in
@@ -83,7 +83,10 @@ struct MovieDetailView : View {
                     case .failure:
                         PlaceholderMovieView()
                     case .empty:
-                        LoadingView()
+                        VStack(alignment: .center) {
+                            LoadingView()
+                        }
+                        .frame(width: g.size.width, height: g.size.height)
                     @unknown default:
                         EmptyView()
                     }
